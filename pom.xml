@@ -17,5 +17,73 @@
         <module>ows-api</module>
     </modules>
 
+    <properties>
+        <!-- maven -->
+        <maven.plugin.compiler.sourceEncoding>UTF-8</maven.plugin.compiler.sourceEncoding>
+        <maven.plugin.compiler.version>3.5.1</maven.plugin.compiler.version>
+        <maven.plugin.compiler.jdkversion>1.8</maven.plugin.compiler.jdkversion>
+        <maven.plugin.source.version>2.2.1</maven.plugin.source.version>
+    </properties>
+
+    <profiles>
+        <!--unix-->
+        <profile>
+            <id>UnixClassPath</id>
+            <properties>
+                <bootclasspath>${java.home}/lib/rt.jar:${java.home}/lib/jce.jar</bootclasspath>
+            </properties>
+            <!--默认选中
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation> -->
+            <activation>
+                <os>
+                    <family>unix</family>
+                </os>
+            </activation>
+        </profile>
+        <!--windows-->
+        <profile>
+            <id>WindowsClassPath</id>
+            <properties>
+                <bootclasspath>${java.home}/lib/rt.jar;${java.home}/lib/jce.jar</bootclasspath>
+            </properties>
+            <activation>
+                <os>
+                    <family>windows</family>
+                </os>
+            </activation>
+        </profile>
+    </profiles>
+
+    <build>
+        <plugins>
+            <!-- compiler code -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven.plugin.compiler.version}</version>
+                <configuration>
+                    <encoding>${maven.plugin.compiler.sourceEncoding}</encoding>
+                    <source>${maven.plugin.compiler.jdkversion}</source>
+                    <target>${maven.plugin.compiler.jdkversion}</target>
+                </configuration>
+            </plugin>
+            <!-- package source code-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>${maven.plugin.source.version}</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
