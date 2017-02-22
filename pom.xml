@@ -13,6 +13,8 @@
         <module>ows-persistence</module>
         <module>ows-service</module>
         <module>ows-open-service</module>
+        <module>ows-open-api</module>
+        <module>ows-api</module>
     </modules>
 
 
