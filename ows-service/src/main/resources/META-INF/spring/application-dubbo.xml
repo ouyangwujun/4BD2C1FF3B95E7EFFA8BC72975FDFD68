@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd"
+       default-lazy-init="true">
+
+    <context:property-placeholder
+            file-encoding="UTF-8"
+            ignore-resource-not-found="true"
+            system-properties-mode="OVERRIDE"
+            location="file:/root/data/ows-service/config.properties"/>
+
+    <bean id="dubboApplicationConfig" class="com.alibaba.dubbo.config.ApplicationConfig">
+        <property name="name" value="ows"/>
+    </bean>
+
+    <bean id="dubboRegistryConfig" class="com.alibaba.dubbo.config.RegistryConfig">
+        <property name="address" value="${dubbo.registry.url}"/>
+    </bean>
+
+    <bean id="dubboProtocolConfig" class="com.alibaba.dubbo.config.ProtocolConfig">
+        <property name="port" value="-1" />
+        <property name="host" value="${dubbo.export.host}"/>
+    </bean>
+
+</beans>
