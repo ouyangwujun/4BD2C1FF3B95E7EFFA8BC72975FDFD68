@@ -1,6 +1,6 @@
-package com.test.api;
+package com.object.test.api;
 
-import com.test.entity.ServiceException;
+import com.object.test.entity.ServiceException;
 
 /**
  * Created by PUZE81 on 2017/2/27.

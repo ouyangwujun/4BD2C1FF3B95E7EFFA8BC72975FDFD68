@@ -1,6 +1,6 @@
-package com.test.entity.exception;
+package com.object.test.entity.exception;
 
-import com.test.entity.enums.ServiceExceptionEnum;
+import com.object.test.entity.enums.ServiceExceptionEnum;
 
 /**
  * Created by PUZE81 on 2017/2/27.

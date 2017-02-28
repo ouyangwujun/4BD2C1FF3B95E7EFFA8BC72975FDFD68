@@ -1,7 +1,7 @@
 <configuration debug="true">
     <property file="/root/data/ows-service/config.properties"/>
 
-    <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
+    <appender name="ConsoleLog" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
         </encoder>
@@ -49,8 +49,8 @@
         </encoder>
     </appender>
 
-    <root level="DEBUG">
-        <appender-ref ref="Console" />
+    <root level="debug">
+        <appender-ref ref="ConsoleLog" />
         <appender-ref ref="ErrorFile"/>
         <appender-ref ref="InfoFile"/>
     </root>

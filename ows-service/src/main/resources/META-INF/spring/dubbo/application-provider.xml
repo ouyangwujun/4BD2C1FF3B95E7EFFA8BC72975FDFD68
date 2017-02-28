@@ -10,22 +10,13 @@
                           http://code.alibabatech.com/schema/dubbo
                           http://code.alibabatech.com/schema/dubbo/dubbo.xsd"
        default-lazy-init="true">
-    <!-- annotation open -->
-    <context:annotation-config/>
-    <!-- load config -->
-    <context:property-placeholder
-            file-encoding="UTF-8"
-            ignore-resource-not-found="true"
-            system-properties-mode="OVERRIDE"
-            location="file:/root/data/ows-service/config.properties"/>
-    <!--zookeeper注册中心 -->
-    <dubbo:registry protocol="zookeeper" address="${dubbo.registry.url}"/>
-    <!-- dubbo serve name-->
-    <dubbo:application owner="ouyang" name="ows-serve" />
-    <!-- dubbo serve prot-->
-    <dubbo:protocol name ="dubbo" port="-1" />
-    <!-- provider:提供者 -->
-    <import resource="./dubbo/application-provider.xml" />
-    <!-- consumer:消费者 -->
-    <import resource="./dubbo/application-consumer.xml" />
+    <!--export interface-->
+    <bean id="dubboTestImpl" class="com.object.test.service.DubboTestImpl"/>
+    <dubbo:service  protocol="dubbo"
+                      timeout="${dubbo.export.timeout}"
+                      version="${dubbo.reference.version}"
+                      connections="100"
+                      interface ="com.object.test.api.IDubboTest"
+                      ref="dubboTestImpl"/>
+
 </beans>

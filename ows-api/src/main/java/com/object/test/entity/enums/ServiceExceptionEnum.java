@@ -1,4 +1,4 @@
-package com.test.entity.enums;
+package com.object.test.entity.enums;
 
 /**
  * Created by PUZE81 on 2017/2/27.

@@ -1,4 +1,4 @@
-package com.test.entity;
+package com.object.test.entity;
 
 /**
  * Created by PUZE81 on 2017/2/27.
