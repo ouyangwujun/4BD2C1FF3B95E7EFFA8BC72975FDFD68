@@ -1,4 +1,4 @@
-<configuration debug="true">
+<configuration info="true">
     <property file="/root/data/ows-service/config.properties"/>
 
     <appender name="ConsoleLog" class="ch.qos.logback.core.ConsoleAppender">
