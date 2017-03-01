@@ -9,10 +9,10 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>ows-open-api</artifactId>
+    <artifactId>ows-disopen-api</artifactId>
     <version>${project.parent.version}</version>
     <packaging>jar</packaging>
-    <!-- build -->
+
     <build>
         <plugins>
             <!-- compiler code -->
@@ -28,6 +28,17 @@
                     <compilerArguments>
                         <bootclasspath>${bootclasspath}</bootclasspath>
                     </compilerArguments>
+                </configuration>
+            </plugin>
+            <!-- package jar-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>${maven.plugin.jar.version}</version>
+                <configuration>
+                    <archive>
+                        <manifestFile>src/main/resources/META-INF/MANIFEST.MF</manifestFile>
+                    </archive>
                 </configuration>
             </plugin>
             <!-- package source code-->

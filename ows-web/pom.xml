@@ -7,6 +7,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>ows-web</artifactId>
+    <version>${project.parent.version}</version>
     <packaging>war</packaging>
     <name>ows-web Maven Webapp</name>
     <url>http://maven.apache.org</url>

@@ -12,10 +12,10 @@
     <modules>
         <module>ows-web</module>
         <module>ows-persistence</module>
-        <module>ows-service</module>
         <module>ows-open-service</module>
         <module>ows-open-api</module>
-        <module>ows-api</module>
+        <module>ows-disopen-service</module>
+        <module>ows-disopen-api</module>
     </modules>
 
     <properties>
@@ -28,8 +28,8 @@
         <maven.plugin.deploy.version>2.6</maven.plugin.deploy.version>
         <!-- ############dependency############# -->
         <dubbo_version>2.8.4</dubbo_version>
-        <zkclient_version>0.1</zkclient_version>
-        <netty_version>3.2.10.Final</netty_version>
+        <zookeeper_version>3.4.6</zookeeper_version>
+        <zkclient_version>0.4</zkclient_version>
         <javassist_version>3.20.0-GA</javassist_version>
         <commons.logging_version>1.1.1</commons.logging_version>
         <slf4j_version>1.7.5</slf4j_version>
@@ -71,51 +71,17 @@
         </profile>
     </profiles>
 
-    <build>
-        <plugins>
-            <!-- compiler code -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>${maven.plugin.compiler.version}</version>
-                <configuration>
-                    <encoding>${maven.plugin.compiler.sourceEncoding}</encoding>
-                    <source>${maven.plugin.compiler.jdkversion}</source>
-                    <target>${maven.plugin.compiler.jdkversion}</target>
-                </configuration>
-            </plugin>
-            <!-- package source code-->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-source-plugin</artifactId>
-                <version>${maven.plugin.source.version}</version>
-                <executions>
-                    <execution>
-                        <id>attach-sources</id>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <!-- deploy code-->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-deploy-plugin</artifactId>
-                <version>${maven.plugin.deploy.version}</version>
-                <configuration>
-                    <skip>true</skip>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
-
     <dependencyManagement>
         <dependencies>
             <!-- #########################应用包########################## -->
             <dependency>
                 <groupId>com.object</groupId>
-                <artifactId>ows-api</artifactId>
+                <artifactId>ows-disopen-api</artifactId>
+                <version>1.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>com.object</groupId>
+                <artifactId>ows-open-api</artifactId>
                 <version>1.0-SNAPSHOT</version>
             </dependency>
             <!-- ######################第三方包########################## -->
@@ -128,9 +94,9 @@
             <dependency>
                 <groupId>org.javassist</groupId>
                 <artifactId>javassist</artifactId>
-                <version>3.18.1-GA</version>
+                <version>${javassist_version}</version>
             </dependency>
-            <!-- log lib -->
+            <!-- ####log lib#### -->
             <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-api</artifactId>
@@ -146,11 +112,11 @@
                 <artifactId>logback-classic</artifactId>
                 <version>${logback_version}</version>
             </dependency>
-            <!-- zk -->
+            <!-- ####zk#### -->
             <dependency>
                 <groupId>org.apache.zookeeper</groupId>
                 <artifactId>zookeeper</artifactId>
-                <version>3.4.6</version>
+                <version>${zookeeper_version}</version>
                 <exclusions>
                     <exclusion>
                         <groupId>io.netty</groupId>
@@ -177,9 +143,9 @@
             <dependency>
                 <groupId>com.101tec</groupId>
                 <artifactId>zkclient</artifactId>
-                <version>0.4</version>
+                <version>${zkclient_version}</version>
             </dependency>
-            <!-- dubbo -->
+            <!-- ####dubbo#### -->
             <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>dubbo</artifactId>
@@ -215,7 +181,57 @@
                     </exclusion>
                 </exclusions>
             </dependency>
-            <!-- spring -->
+            <dependency>
+                <groupId>org.jboss.resteasy</groupId>
+                <artifactId>resteasy-jaxrs</artifactId>
+                <version>3.0.7.Final</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jboss.resteasy</groupId>
+                <artifactId>resteasy-client</artifactId>
+                <version>3.0.7.Final</version>
+            </dependency>
+            <dependency>
+                <groupId>javax.validation</groupId>
+                <artifactId>validation-api</artifactId>
+                <version>1.0.0.GA</version>
+            </dependency>
+            <!-- 如果要使用json序列化 -->
+            <dependency>
+                <groupId>org.jboss.resteasy</groupId>
+                <artifactId>resteasy-jackson-provider</artifactId>
+                <version>3.0.7.Final</version>
+            </dependency>
+            <!-- 如果要使用xml序列化 -->
+            <dependency>
+                <groupId>org.jboss.resteasy</groupId>
+                <artifactId>resteasy-jaxb-provider</artifactId>
+                <version>3.0.7.Final</version>
+            </dependency>
+            <!-- 如果要使用netty server -->
+            <dependency>
+                <groupId>org.jboss.resteasy</groupId>
+                <artifactId>resteasy-netty</artifactId>
+                <version>3.0.7.Final</version>
+            </dependency>
+            <!-- 如果要使用Sun HTTP server -->
+            <dependency>
+                <groupId>org.jboss.resteasy</groupId>
+                <artifactId>resteasy-jdk-http</artifactId>
+                <version>3.0.7.Final</version>
+            </dependency>
+            <!-- 如果要使用tomcat server -->
+            <dependency>
+                <groupId>org.apache.tomcat.embed</groupId>
+                <artifactId>tomcat-embed-core</artifactId>
+                <version>8.0.11</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.tomcat.embed</groupId>
+                <artifactId>tomcat-embed-logging-juli</artifactId>
+                <version>8.0.11</version>
+            </dependency>
+            <!-- ####spring#### -->
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-aop</artifactId>
@@ -245,24 +261,6 @@
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-web</artifactId>
                 <version>${spring_version}</version>
-            </dependency>
-            <!-- validation -->
-            <dependency>
-                <groupId>javax.validation</groupId>
-                <artifactId>validation-api</artifactId>
-                <version>1.0.0.GA</version>
-            </dependency>
-            <!-- annotation -->
-            <dependency>
-                <groupId>javax.annotation</groupId>
-                <artifactId>javax.annotation-api</artifactId>
-                <version>1.2</version>
-            </dependency>
-            <!-- jackson -->
-            <dependency>
-                <groupId>org.codehaus.jackson</groupId>
-                <artifactId>jackson-mapper-asl</artifactId>
-                <version>1.9.12</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
