@@ -1,4 +1,4 @@
-package com.object.test;
+package com.object.test.disopen.service;
 
 /**
  * dubbo run in localhost
