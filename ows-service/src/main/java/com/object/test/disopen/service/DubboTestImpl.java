@@ -1,4 +1,4 @@
-package com.object.test.service;
+package com.object.test.disopen.service;
 
 import com.object.test.api.disopen.IDubboTest;
 import com.object.test.api.disopen.entity.bo.TestBO;

@@ -11,7 +11,7 @@
                           http://code.alibabatech.com/schema/dubbo/dubbo.xsd"
        default-lazy-init="true">
     <!--export interface-->
-    <bean id="dubboTestImpl" class="com.object.test.service.DubboTestImpl"/>
+    <bean id="dubboTestImpl" class="com.object.test.disopen.service.DubboTestImpl"/>
     <dubbo:service  protocol="dubbo"
                       timeout="${dubbo.export.timeout}"
                       version="${dubbo.reference.version}"
