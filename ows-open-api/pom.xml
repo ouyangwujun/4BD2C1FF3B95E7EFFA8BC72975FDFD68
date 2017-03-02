@@ -12,6 +12,12 @@
     <artifactId>ows-open-api</artifactId>
     <version>${project.parent.version}</version>
     <packaging>jar</packaging>
+
+    <properties>
+        <!-- maven部署包到远程仓库是否开启 -->
+        <skip_maven_deploy>false</skip_maven_deploy>
+    </properties>
+
     <!-- build -->
     <build>
         <plugins>
@@ -49,9 +55,8 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-deploy-plugin</artifactId>
                 <version>${maven.plugin.deploy.version}</version>
-                <!-- maven部署包到远程仓库是否开启 -->
                 <configuration>
-                    <skip>true</skip>
+                    <skip>${skip_maven_deploy}</skip>
                 </configuration>
             </plugin>
         </plugins>
