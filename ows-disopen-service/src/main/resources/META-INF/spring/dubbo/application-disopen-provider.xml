@@ -16,7 +16,7 @@
                       timeout="${dubbo.export.timeout}"
                       version="${dubbo.reference.version}"
                       connections="100"
-                      interface ="com.object.test.api.IDubboTest"
+                      interface ="com.object.test.api.disopen.IDubboTest"
                       ref="dubboTestImpl"/>
 
 </beans>

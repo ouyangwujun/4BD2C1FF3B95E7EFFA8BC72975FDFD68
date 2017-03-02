@@ -24,7 +24,7 @@ public class DubboTestImpl implements IDubboTest {
     public TestBO testMathed(TestDTO testDTO) throws ServiceException {
         TestBO testBO = new TestBO();
         BeanUtils.copyProperties(testDTO, testBO);
-        logger.info("disopen testMathed Return TestBO:{}",testBO.toString());
+        logger.info("disopen testMathed Return :{}",testBO.toString());
         return testBO;
     }
 }

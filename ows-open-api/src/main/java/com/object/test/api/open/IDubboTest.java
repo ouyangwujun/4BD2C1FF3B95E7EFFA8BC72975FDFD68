@@ -8,7 +8,7 @@ import com.object.test.api.open.entity.response.TestResponse;
  */
 public interface IDubboTest {
 
-    void testMathed();
+    TestResponse testMathedPost(TestRequest testRequest);
 
-    TestResponse testMathed(TestRequest testRequest);
+    TestResponse testMathedGet(String testRequest);
 }

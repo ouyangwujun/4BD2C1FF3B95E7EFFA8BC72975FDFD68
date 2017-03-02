@@ -19,20 +19,24 @@ public class DubboTestFacade implements IDubboTest{
 
     private static final Logger logger  = LoggerFactory.getLogger(DubboTestFacade.class);
 
-    @GET
+    @POST
     @Path("searchTest")
-    @Produces({ContentType.APPLICATION_JSON_UTF_8, ContentType.TEXT_XML_UTF_8})
-    public TestResponse testMathed(@PathParam("queryTest") TestRequest testRequest) {
+    @Consumes({ContentType.APPLICATION_JSON_UTF_8, ContentType.TEXT_XML_UTF_8})
+    public TestResponse testMathedPost(TestRequest testRequest) {
         TestResponse testResponse = new TestResponse();
         BeanUtils.copyProperties(testRequest, testResponse);
-        logger.info("open testMathed Return TestBO:{}",testRequest.toString());
+        logger.info("open testMathedPost Return :{}",testRequest.toString());
         return testResponse;
     }
 
-    @POST
+    @GET
     @Path("pullTest")
-    @Consumes({ContentType.APPLICATION_JSON_UTF_8, ContentType.TEXT_XML_UTF_8})
-    public void testMathed() {
-        logger.info("open testMathed:{}","test mathed.");
+    @Produces({ContentType.APPLICATION_JSON_UTF_8, ContentType.TEXT_XML_UTF_8})
+    public TestResponse testMathedGet(@QueryParam("n") String name) {
+        TestResponse testResponse = new TestResponse();
+        testResponse.setCode(1000000L);
+        testResponse.setName(name);
+        logger.info("open testMathedGet Return :{}",testResponse.toString());
+        return testResponse;
     }
 }
