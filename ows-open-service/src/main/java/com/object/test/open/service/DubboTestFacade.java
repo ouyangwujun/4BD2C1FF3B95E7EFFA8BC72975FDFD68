@@ -12,16 +12,20 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
 /**
- * Created by PUZE81 on 2017/3/1.
+ * Reset接口开放
+ * Created by ouyang on 2017/3/1.
+ * Consumes:方法可以接受的 MIME 类型
+ * Produces:方法可以返回的 MIME 类型
  */
 @Path("dubboTestFacade")
+@Consumes({ContentType.APPLICATION_JSON_UTF_8, ContentType.TEXT_XML_UTF_8})
+@Produces({ContentType.APPLICATION_JSON_UTF_8, ContentType.TEXT_XML_UTF_8})
 public class DubboTestFacade implements IDubboTest{
 
     private static final Logger logger  = LoggerFactory.getLogger(DubboTestFacade.class);
 
     @POST
     @Path("searchTest")
-    @Consumes({ContentType.APPLICATION_JSON_UTF_8, ContentType.TEXT_XML_UTF_8})
     public TestResponse testMathedPost(TestRequest testRequest) {
         TestResponse testResponse = new TestResponse();
         BeanUtils.copyProperties(testRequest, testResponse);
@@ -31,7 +35,6 @@ public class DubboTestFacade implements IDubboTest{
 
     @GET
     @Path("pullTest")
-    @Produces({ContentType.APPLICATION_JSON_UTF_8, ContentType.TEXT_XML_UTF_8})
     public TestResponse testMathedGet(@QueryParam("n") String name) {
         TestResponse testResponse = new TestResponse();
         testResponse.setCode(1000000L);

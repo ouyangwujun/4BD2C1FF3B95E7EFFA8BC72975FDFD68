@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 
 /**
- * Created by PUZE81 on 2017/2/28.
+ * Created by ouyang on 2017/2/28.
  */
 public class DubboTestImpl implements IDubboTest {
 
