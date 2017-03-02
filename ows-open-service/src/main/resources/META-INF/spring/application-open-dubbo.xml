@@ -18,8 +18,12 @@
             ignore-resource-not-found="true"
             system-properties-mode="OVERRIDE"
             location="file:/root/data/ows-service/config.properties"/>
-    <!-- dubbo serve name-->
-    <dubbo:application owner="ouyang" name="ows-open-serve" />
+    <!-- dubbo serve name:
+                organization:公司
+                owner:负责人
+                name:服务名称
+    -->
+    <dubbo:application organization="test" owner="ouyang" name="ows-open-serve"/>
     <!--zookeeper注册中心 -->
     <dubbo:registry protocol="zookeeper" address="${dubbo.registry.url}"/>
     <!-- rest serve 配置:
@@ -30,11 +34,13 @@
             accepts:同时接收的最大HTTP连接数
     -->
     <dubbo:protocol name="rest"
-                      server="jetty"
+                      server="tomcat"
                       port="8888"
                       contextpath="services"
                       threads="500"
-                      accepts="500"/>
+                      accepts="500"
+                      extension="com.alibaba.dubbo.rpc.protocol.rest.support.LoggingFilter"
+    />
     <!-- provider:提供者 -->
     <import resource="./dubbo/application-open-provider.xml" />
     <!-- consumer:消费者 -->

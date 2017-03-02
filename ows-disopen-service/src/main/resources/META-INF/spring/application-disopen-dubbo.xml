@@ -18,10 +18,14 @@
             ignore-resource-not-found="true"
             system-properties-mode="OVERRIDE"
             location="file:/root/data/ows-service/config.properties"/>
+    <!-- dubbo serve name:
+                organization:公司
+                owner:负责人
+                name:服务名称
+    -->
+    <dubbo:application organization="test" owner="ouyang" name="ows-disopen-serve" />
     <!--zookeeper注册中心 -->
     <dubbo:registry protocol="zookeeper" address="${dubbo.registry.url}"/>
-    <!-- dubbo serve name-->
-    <dubbo:application owner="ouyang" name="ows-disopen-serve" />
     <!-- dubbo serve prot-->
     <dubbo:protocol name ="dubbo" port="-1" />
     <!-- provider:提供者 -->
