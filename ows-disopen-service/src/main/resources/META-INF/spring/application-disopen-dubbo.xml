@@ -21,11 +21,11 @@
     <!--zookeeper注册中心 -->
     <dubbo:registry protocol="zookeeper" address="${dubbo.registry.url}"/>
     <!-- dubbo serve name-->
-    <dubbo:application owner="ouyang" name="ows-serve" />
+    <dubbo:application owner="ouyang" name="ows-disopen-serve" />
     <!-- dubbo serve prot-->
     <dubbo:protocol name ="dubbo" port="-1" />
     <!-- provider:提供者 -->
-    <import resource="./dubbo/application-provider.xml" />
+    <import resource="./dubbo/application-disopen-provider.xml" />
     <!-- consumer:消费者 -->
-    <import resource="./dubbo/application-consumer.xml" />
+    <import resource="./dubbo/application-disopen-consumer.xml" />
 </beans>

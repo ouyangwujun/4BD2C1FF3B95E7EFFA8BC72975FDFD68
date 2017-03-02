@@ -16,7 +16,6 @@
         <module>ows-open-api</module>
         <module>ows-disopen-service</module>
         <module>ows-disopen-api</module>
-        <module>ows-service</module>
     </modules>
 
     <properties>

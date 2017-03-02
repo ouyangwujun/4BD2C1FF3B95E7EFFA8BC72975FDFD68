@@ -11,12 +11,12 @@
                           http://code.alibabatech.com/schema/dubbo/dubbo.xsd"
        default-lazy-init="true">
     <!--export interface-->
-    <bean id="dubboTestImpl" class="com.object.test.disopen.service.DubboTestImpl"/>
+    <bean id="dubboTestFacade" class="com.object.test.open.service.DubboTestFacade"/>
     <dubbo:service  protocol="dubbo"
                       timeout="${dubbo.export.timeout}"
                       version="${dubbo.reference.version}"
                       connections="100"
-                      interface ="com.object.test.api.IDubboTest"
-                      ref="dubboTestImpl"/>
+                      interface ="com.object.test.api.open.IDubboTest"
+                      ref="dubboTestFacade"/>
 
 </beans>
