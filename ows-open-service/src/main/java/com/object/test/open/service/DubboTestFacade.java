@@ -26,7 +26,7 @@ public class DubboTestFacade implements IDubboTest{
 
     @POST
     @Path("searchTest")
-    public TestResponse testMathedPost(TestRequest testRequest) {
+    public TestResponse testMathedPost(@BeanParam TestRequest testRequest) {
         TestResponse testResponse = new TestResponse();
         BeanUtils.copyProperties(testRequest, testResponse);
         logger.info("open testMathedPost Return :{}",testRequest.toString());

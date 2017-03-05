@@ -16,6 +16,7 @@
     <properties>
         <!-- maven部署包到远程仓库是否开启 -->
         <skip_maven_deploy>false</skip_maven_deploy>
+        <skip_maven_assembly>true</skip_maven_assembly>
         <path_maven_manifest>src/main/resources/META-INF/MANIFEST.MF</path_maven_manifest>
     </properties>
 

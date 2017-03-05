@@ -22,6 +22,7 @@
         <!-- ###########maven############ -->
         <!-- maven部署包到远程仓库是否开启 -->
         <skip_maven_deploy>true</skip_maven_deploy>
+        <skip_maven_assembly>true</skip_maven_assembly>
         <path_maven_manifest></path_maven_manifest>
         <!-- maven plugin -->
         <maven.plugin.compiler.sourceEncoding>UTF-8</maven.plugin.compiler.sourceEncoding>
@@ -110,6 +111,25 @@
                         <bootclasspath>${bootclasspath}</bootclasspath>
                     </compilerArguments>
                 </configuration>
+            </plugin>
+            <!-- package 自定义-->
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <configuration>
+                    <descriptors>
+                        <descriptor>src/main/resources/assemblies/release.xml</descriptor>
+                    </descriptors>
+                    <skipAssembly>${skip_maven_assembly}</skipAssembly>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
             <!-- package jar-->
             <plugin>

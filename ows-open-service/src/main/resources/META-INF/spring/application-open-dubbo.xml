@@ -34,7 +34,7 @@
             accepts:同时接收的最大HTTP连接数
     -->
     <dubbo:protocol name="rest"
-                      server="tomcat"
+                      server="jetty"
                       port="8888"
                       contextpath="services"
                       threads="500"
