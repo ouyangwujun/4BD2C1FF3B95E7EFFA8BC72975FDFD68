@@ -12,4 +12,9 @@
     <version>${project.parent.version}</version>
     <packaging>jar</packaging>
 
+    <properties>
+        <!-- maven部署包到远程仓库是否开启 -->
+        <skip_maven_deploy>true</skip_maven_deploy>
+        <path_maven_manifest></path_maven_manifest>
+    </properties>
 </project>

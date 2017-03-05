@@ -16,62 +16,6 @@
     <properties>
         <!-- maven部署包到远程仓库是否开启 -->
         <skip_maven_deploy>false</skip_maven_deploy>
+        <path_maven_manifest>src/main/resources/META-INF/MANIFEST.MF</path_maven_manifest>
     </properties>
-
-    <!-- build -->
-    <build>
-        <plugins>
-            <!-- compiler code -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>${maven.plugin.compiler.version}</version>
-                <configuration>
-                    <encoding>${maven.plugin.compiler.sourceEncoding}</encoding>
-                    <source>${maven.plugin.compiler.jdkversion}</source>
-                    <target>${maven.plugin.compiler.jdkversion}</target>
-                    <showWarnings>true</showWarnings>
-                    <compilerArguments>
-                        <bootclasspath>${bootclasspath}</bootclasspath>
-                    </compilerArguments>
-                </configuration>
-            </plugin>
-            <!-- package source code-->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-source-plugin</artifactId>
-                <version>${maven.plugin.source.version}</version>
-                <executions>
-                    <execution>
-                        <id>attach-sources</id>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <!-- deploy code-->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-deploy-plugin</artifactId>
-                <version>${maven.plugin.deploy.version}</version>
-                <configuration>
-                    <skip>${skip_maven_deploy}</skip>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
-    <!-- maven部署仓库地址设置 -->
-    <distributionManagement>
-        <repository>
-            <id>releases</id>
-            <name>releases</name>
-            <url>http://mvn.puzeyf.com/nexus/content/repositories/releases/</url>
-        </repository>
-        <snapshotRepository>
-            <id>snapshots</id>
-            <name>snapshots</name>
-            <url>http://mvn.puzeyf.com/nexus/content/repositories/snapshots/</url>
-        </snapshotRepository>
-    </distributionManagement>
 </project>

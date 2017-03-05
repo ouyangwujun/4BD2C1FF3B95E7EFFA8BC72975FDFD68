@@ -11,6 +11,13 @@
     <packaging>war</packaging>
     <name>ows-web Maven Webapp</name>
     <url>http://maven.apache.org</url>
+
+    <properties>
+        <!-- maven部署包到远程仓库是否开启 -->
+        <skip_maven_deploy>true</skip_maven_deploy>
+        <skip_maven_manifest>true</skip_maven_manifest>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>junit</groupId>

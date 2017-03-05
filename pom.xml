@@ -19,7 +19,11 @@
     </modules>
 
     <properties>
-        <!-- ###########maven plugin############ -->
+        <!-- ###########maven############ -->
+        <!-- maven部署包到远程仓库是否开启 -->
+        <skip_maven_deploy>true</skip_maven_deploy>
+        <path_maven_manifest></path_maven_manifest>
+        <!-- maven plugin -->
         <maven.plugin.compiler.sourceEncoding>UTF-8</maven.plugin.compiler.sourceEncoding>
         <maven.plugin.compiler.version>3.5.1</maven.plugin.compiler.version>
         <maven.plugin.compiler.jdkversion>1.8</maven.plugin.compiler.jdkversion>
@@ -69,7 +73,95 @@
                 </os>
             </activation>
         </profile>
+        <!--pz repository path -->
+        <profile>
+            <id>pz_repository</id>
+            <properties>
+                <releasesurl>http://mvn.puzeyf.com/nexus/content/repositories/releases/</releasesurl>
+                <snapshotsurl>http://mvn.puzeyf.com/nexus/content/repositories/snapshots/</snapshotsurl>
+            </properties>
+        </profile>
+        <!--my repository path -->
+        <profile>
+            <id>my_repository</id>
+            <properties>
+                <releasesurl>http://192.168.1.129:8081/repository/maven-releases/</releasesurl>
+                <snapshotsurl>http://192.168.1.129:8081/repository/maven-snapshots/</snapshotsurl>
+            </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
     </profiles>
+
+    <build>
+        <plugins>
+            <!-- compiler code -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven.plugin.compiler.version}</version>
+                <configuration>
+                    <encoding>${maven.plugin.compiler.sourceEncoding}</encoding>
+                    <source>${maven.plugin.compiler.jdkversion}</source>
+                    <target>${maven.plugin.compiler.jdkversion}</target>
+                    <showWarnings>true</showWarnings>
+                    <compilerArguments>
+                        <bootclasspath>${bootclasspath}</bootclasspath>
+                    </compilerArguments>
+                </configuration>
+            </plugin>
+            <!-- package jar-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>${maven.plugin.jar.version}</version>
+                <configuration>
+                    <archive>
+                        <manifestFile>${path_maven_manifest}</manifestFile>
+                    </archive>
+                </configuration>
+            </plugin>
+            <!-- package source code-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>${maven.plugin.source.version}</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- deploy code-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <version>${maven.plugin.deploy.version}</version>
+                <!-- maven部署包到远程仓库是否开启 -->
+                <configuration>
+                    <skip>${skip_maven_deploy}</skip>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <!-- maven部署仓库地址设置 -->
+    <distributionManagement>
+        <repository>
+            <id>releases</id>
+            <name>releases</name>
+            <url>${releasesurl}</url>
+        </repository>
+        <snapshotRepository>
+            <id>snapshots</id>
+            <name>snapshots</name>
+            <url>${snapshotsurl}</url>
+        </snapshotRepository>
+    </distributionManagement>
 
     <dependencyManagement>
         <dependencies>

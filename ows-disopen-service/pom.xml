@@ -9,56 +9,6 @@
     <artifactId>ows-disopen-service</artifactId>
     <packaging>jar</packaging>
 
-    <properties>
-
-    </properties>
-
-    <build>
-        <finalName>ows-disopen-service</finalName>
-        <resources>
-            <resource>
-                <filtering>true</filtering>
-                <directory>src/main/resources</directory>
-            </resource>
-        </resources>
-        <plugins>
-            <!-- compiler code -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>${maven.plugin.compiler.version}</version>
-                <configuration>
-                    <encoding>${maven.plugin.compiler.sourceEncoding}</encoding>
-                    <source>${maven.plugin.compiler.jdkversion}</source>
-                    <target>${maven.plugin.compiler.jdkversion}</target>
-                    <showWarnings>true</showWarnings>
-                    <compilerArguments>
-                        <bootclasspath>${bootclasspath}</bootclasspath>
-                    </compilerArguments>
-                </configuration>
-            </plugin>
-            <!-- package code -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-assembly-plugin</artifactId>
-                <configuration>
-                    <descriptors>
-                        <descriptor>src/main/resources/assemblies/release.xml</descriptor>
-                    </descriptors>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>make-assembly</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>single</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-    </build>
-
     <dependencies>
         <!-- #########################应用包########################## -->
         <dependency>
