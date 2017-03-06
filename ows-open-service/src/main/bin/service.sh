@@ -20,10 +20,9 @@ JAVA_OPT_1="-server -Xms2g -Xmx2g -Xmn1g -XX:PermSize=128m -XX:MaxPermSize=320m"
 JAVA_OPT_2="-XX:+UseConcMarkSweepGC -XX:+UseCMSCompactAtFullCollection -XX:CMSInitiatingOccupancyFraction=70 -XX:+CMSParallelRemarkEnabled -XX:SoftRefLRUPolicyMSPerMB=0 -XX:+CMSClassUnloadingEnabled -XX:SurvivorRatio=8 -XX:+DisableExplicitGC"
 #JAVA_OPT_3="-verbose:gc -Xloggc:${HOME}/demo_gc.log -XX:+PrintGCDetails"
 JAVA_OPT_4="-XX:-OmitStackTraceInFastThrow"
-JAVA_OPT_5="-Dfile.encoding=UTF-8 -Djava.ext.dirs=${JAVA_HOME}/jre/lib/ext"
+JAVA_OPT_5="-Dserve.name=${SERVICE_NAME} -Dfile.encoding=UTF-8 -Djava.ext.dirs=${JAVA_HOME}/jre/lib/ext"
 #JAVA_OPT_6="-Xdebug -Xrunjdwp:transport=dt_socket,address=9555,server=y,suspend=n"
 JAVA_OPT_7="-cp ${CLASSPATH}"
-
 #JAVA_OPTS="${JAVA_OPT_1} ${JAVA_OPT_2} ${JAVA_OPT_3} ${JAVA_OPT_4} ${JAVA_OPT_5} ${JAVA_OPT_6} ${JAVA_OPT_7}"
 JAVA_OPTS="${JAVA_OPT_1} ${JAVA_OPT_2} ${JAVA_OPT_4} ${JAVA_OPT_5} ${JAVA_OPT_7}"
 
