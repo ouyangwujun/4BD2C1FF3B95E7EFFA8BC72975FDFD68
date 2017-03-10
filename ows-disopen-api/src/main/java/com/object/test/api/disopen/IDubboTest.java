@@ -7,6 +7,7 @@ import com.object.test.api.disopen.exception.ServiceException;
 /**
  * Created by PUZE81 on 2017/2/27.
  */
+
 public interface IDubboTest {
 
     void testMathed()throws ServiceException;

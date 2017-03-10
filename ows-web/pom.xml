@@ -9,7 +9,7 @@
     <artifactId>ows-web</artifactId>
     <version>${project.parent.version}</version>
     <packaging>war</packaging>
-    <name>ows-web Maven Webapp</name>
+    <name>ows-web</name>
     <url>http://maven.apache.org</url>
 
     <properties>
@@ -25,6 +25,7 @@
             <version>3.8.1</version>
             <scope>test</scope>
         </dependency>
+
     </dependencies>
     <build>
         <finalName>ows-web</finalName>
