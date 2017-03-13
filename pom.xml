@@ -16,7 +16,8 @@
         <module>ows-open-api</module>
         <module>ows-disopen-service</module>
         <module>ows-disopen-api</module>
-        <module>ows-swaggerui-web</module>
+        <module>ows-swagger-web</module>
+        <module>docs</module>
     </modules>
 
     <properties>
@@ -167,7 +168,7 @@
                     </execution>
                 </executions>
             </plugin>
-            <!-- deploy code-->
+            <!--maven deploy code-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-deploy-plugin</artifactId>
@@ -403,22 +404,17 @@
                 <version>${spring_version}</version>
             </dependency>
             <!-- ##########################swagger###################### -->
-            <!--petstore是官方的一个demo，加入此依赖是为了稍后参考接口描述的编写-->
-            <dependency>
-                <groupId>io.springfox</groupId>
-                <artifactId>springfox-petstore</artifactId>
-                <version>${swagger_version}</version>
-            </dependency>
-            <dependency>
+<!--            <dependency>
                 <groupId>io.springfox</groupId>
                 <artifactId>springfox-swagger2</artifactId>
                 <version>${swagger_version}</version>
-            </dependency>
+            </dependency>-->
             <dependency>
                 <groupId>com.mangofactory</groupId>
                 <artifactId>swagger-springmvc</artifactId>
                 <version>${swagger_springmvc_version}</version>
             </dependency>
+            <!-- jackson -->
             <dependency>
                 <groupId>com.fasterxml.jackson.core</groupId>
                 <artifactId>jackson-annotations</artifactId>
