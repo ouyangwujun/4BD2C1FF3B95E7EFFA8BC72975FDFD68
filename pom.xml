@@ -39,13 +39,13 @@
         <zkclient_version>0.4</zkclient_version>
         <javassist_version>3.20.0-GA</javassist_version>
         <commons.logging_version>1.1.1</commons.logging_version>
-        <slf4j_version>1.7.5</slf4j_version>
+        <slf4j_version>1.7.7</slf4j_version>
         <logback_version>1.0.13</logback_version>
         <spring_version>4.2.4.RELEASE</spring_version>
         <mybatis_version>3.2.7</mybatis_version>
         <mybatis.spring_version>1.2.2</mybatis.spring_version>
         <mysql.connector.java_version>1.2.2</mysql.connector.java_version>
-        <jackson_version>2.4.4</jackson_version>
+        <jackson_version>2.6.6</jackson_version>
         <swagger_version>2.4.0</swagger_version>
         <swagger_springmvc_version>1.0.2</swagger_springmvc_version>
     </properties>
@@ -101,7 +101,7 @@
     </profiles>
 
     <build>
-        <finalName>${project.artifactId}</finalName>
+        <finalName>${project.artifactId}-${project.parent.version}</finalName>
         <resources>
             <resource>
                 <filtering>true</filtering>
@@ -228,6 +228,11 @@
                 <version>${javassist_version}</version>
             </dependency>
             <!-- ####log lib#### -->
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-log4j12</artifactId>
+                <version>${slf4j_version}</version>
+            </dependency>
             <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-api</artifactId>
