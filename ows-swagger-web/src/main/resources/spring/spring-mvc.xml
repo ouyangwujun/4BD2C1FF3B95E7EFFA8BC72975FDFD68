@@ -8,6 +8,8 @@
         http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd  ">
     <!-- 使用 Swagger Restful API文档时，添加此注解 -->
     <mvc:default-servlet-handler />
+    <!-- swagger注解扫描:自定义Controller -->
+    <context:component-scan base-package="com.object.swagger.controller" />
     <!-- 开启扫描注解 -->
     <mvc:annotation-driven />
     <!-- 自定义过滤器 -->
