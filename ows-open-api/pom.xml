@@ -22,13 +22,13 @@
     </properties>
     <dependencies>
         <!-- ####swagger#### -->
-<!--        <dependency>
+        <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger2</artifactId>
-        </dependency>-->
-        <dependency>
+        </dependency>
+<!--        <dependency>
             <groupId>com.mangofactory</groupId>
             <artifactId>swagger-springmvc</artifactId>
-        </dependency>
+        </dependency>-->
     </dependencies>
 </project>

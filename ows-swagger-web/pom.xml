@@ -20,15 +20,15 @@
     </properties>
 
     <dependencies>
-        <!-- #########################应用########################## -->
-        <dependency>
-            <groupId>com.object</groupId>
-            <artifactId>ows-open-api</artifactId>
-        </dependency>
         <!-- #########################TEST########################## -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
+        </dependency>
+        <!-- #########################应用########################## -->
+        <dependency>
+            <groupId>com.object</groupId>
+            <artifactId>ows-open-api</artifactId>
         </dependency>
         <!-- #########################LOG########################## -->
         <dependency>
@@ -44,25 +44,17 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
         </dependency>
-<!--        <dependency>
+        <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger2</artifactId>
-        </dependency>-->
-        <dependency>
+        </dependency>
+<!--        <dependency>
             <groupId>com.mangofactory</groupId>
             <artifactId>swagger-springmvc</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-annotations</artifactId>
-        </dependency>
+        </dependency>-->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-core</artifactId>
         </dependency>
         <dependency>
             <groupId>javax.servlet</groupId>

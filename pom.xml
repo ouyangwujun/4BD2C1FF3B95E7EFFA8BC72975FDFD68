@@ -409,30 +409,20 @@
                 <version>${spring_version}</version>
             </dependency>
             <!-- ##########################swagger###################### -->
-<!--            <dependency>
+            <dependency>
                 <groupId>io.springfox</groupId>
                 <artifactId>springfox-swagger2</artifactId>
                 <version>${swagger_version}</version>
-            </dependency>-->
-            <dependency>
+            </dependency>
+<!--            <dependency>
                 <groupId>com.mangofactory</groupId>
                 <artifactId>swagger-springmvc</artifactId>
                 <version>${swagger_springmvc_version}</version>
-            </dependency>
+            </dependency>-->
             <!-- jackson -->
             <dependency>
                 <groupId>com.fasterxml.jackson.core</groupId>
-                <artifactId>jackson-annotations</artifactId>
-                <version>${jackson_version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.fasterxml.jackson.core</groupId>
                 <artifactId>jackson-databind</artifactId>
-                <version>${jackson_version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.fasterxml.jackson.core</groupId>
-                <artifactId>jackson-core</artifactId>
                 <version>${jackson_version}</version>
             </dependency>
             <!-- servlet -->

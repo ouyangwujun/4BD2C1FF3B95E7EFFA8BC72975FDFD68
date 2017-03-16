@@ -2,7 +2,6 @@ package com.object.swagger.config;
 
 import com.mangofactory.swagger.configuration.SpringSwaggerConfig;
 import com.mangofactory.swagger.models.dto.builder.ApiInfoBuilder;
-import com.mangofactory.swagger.paths.SwaggerPathProvider;
 import com.mangofactory.swagger.plugin.EnableSwagger;
 import com.mangofactory.swagger.plugin.SwaggerSpringMvcPlugin;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,8 +33,7 @@ public class CustomJavaPluginConfig extends WebMvcConfigurerAdapter{
                 .apiInfo(apiInfo())
                 .includePatterns(".*")
                 .useDefaultResponseMessages(false)
-                .apiVersion("1.0.0")
-                .swaggerGroup("user");
+                .apiVersion("1.0.0");
     }
 
     @Override
@@ -49,18 +47,5 @@ public class CustomJavaPluginConfig extends WebMvcConfigurerAdapter{
                 .termsOfServiceUrl("http://blog.csdn.net/he90227")
                 .build();
         return apiInfo;
-    }
-
-    class GtPaths extends SwaggerPathProvider{
-
-        @Override
-        protected String applicationPath() {
-            return "/api";
-        }
-
-        @Override
-        protected String getDocumentationPath() {
-            return "/api";
-        }
     }
 }
