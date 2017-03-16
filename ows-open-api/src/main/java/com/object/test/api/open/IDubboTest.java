@@ -2,7 +2,7 @@ package com.object.test.api.open;
 
 import com.object.test.api.open.entity.request.TestRequest;
 import com.object.test.api.open.entity.response.TestResponse;
-import com.wordnik.swagger.annotations.*;
+import io.swagger.annotations.*;
 import org.springframework.http.MediaType;
 
 /**

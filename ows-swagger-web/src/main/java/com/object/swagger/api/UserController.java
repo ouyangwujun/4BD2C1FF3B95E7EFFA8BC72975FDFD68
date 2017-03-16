@@ -1,10 +1,11 @@
 package com.object.swagger.api;
 
-import com.wordnik.swagger.annotations.Api;
-import com.wordnik.swagger.annotations.ApiOperation;
-import com.wordnik.swagger.annotations.ApiParam;
+import com.object.swagger.api.model.Result;
+import com.object.swagger.api.model.User;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.http.MediaType;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -12,17 +13,16 @@ import org.springframework.web.bind.annotation.*;
  * 用户管理
  *
  */
-@Api(value = "user", description = "用户管理", produces = MediaType.APPLICATION_JSON_VALUE)
-@Controller
+@RestController
 @RequestMapping("user")
+@Api(value = "user", description = "用户管理", produces = MediaType.APPLICATION_JSON_VALUE,consumes = MediaType.APPLICATION_JSON_VALUE)
 public class UserController {
 
 	// 列出某个类目的所有规格
-	@ApiOperation(value = "获得用户列表", notes = "列表信息", httpMethod = "GET", produces = MediaType.APPLICATION_JSON_VALUE)
-	@ResponseBody
 	@RequestMapping(value = "list", method = RequestMethod.GET)
+	@ApiOperation(value = "获得用户列表", notes = "列表信息", httpMethod = "GET")
 	public Result<User> list(
-			@ApiParam(value = "分类ID", required = true) @RequestParam Long categoryId,	
+			@ApiParam(value = "分类ID", required = true) @RequestParam Long categoryId,
 			@ApiParam(value = "分类ID", required = true) @RequestParam Long categoryId2,
 			@ApiParam(value = "token", required = true) @RequestParam String token) {
 		Result<User> result = new Result<User>();
@@ -36,11 +36,8 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "getUserById", method = RequestMethod.GET)
-	@ResponseBody
-	@ApiOperation(value = "根据id获得用户信息", notes = "用户信息", httpMethod = "GET", produces = MediaType.APPLICATION_JSON_VALUE)
-	public User getUserById(
-			@ApiParam(value = "user ID", required = true) @RequestParam String id
-			){
+	@ApiOperation(value = "获得用户", notes = "列表信息", httpMethod = "GET")
+	public User getUserById(@ApiParam(value = "user ID", required = true) @RequestParam String id){
 		User user = new User();
 		user.setName("lisi");
 		user.setPassword("password");
@@ -48,22 +45,15 @@ public class UserController {
 		user.setToken("aastewetwewe97wewesf7w8");
 		return user;
 	}
-
-	@ApiOperation(value = "添加用户", notes = "添加用户(用于数据同步)", httpMethod = "POST", produces = MediaType.APPLICATION_JSON_VALUE)
-	@ResponseBody
-	@RequestMapping(value = "add", method = RequestMethod.POST)
-	// @RequestBody只能有1个
-	// 使用了@RequestBody，不能在拦截器中，获得流中的数据，再json转换，拦截器中，也不清楚数据的类型，无法转换成java对象
-	// 只能手动调用方法
+	@RequestMapping(value = "add", method = RequestMethod.GET)
+	@ApiOperation(value = "添加用户", notes = "添加用户(用于数据同步)", httpMethod = "POST")
 	public Result<String> add(@RequestBody User user) {
 		String u = findUser(user);
 		System.out.println(u);
 		return null;
 	}
-
-	@ApiOperation(value = "update用户", notes = "update user", httpMethod = "POST", produces = MediaType.APPLICATION_JSON_VALUE)
-	@ResponseBody
 	@RequestMapping(value = "update", method = RequestMethod.GET)
+	@ApiOperation(value = "update用户", notes = "update user", httpMethod = "POST")
 	public Result<String> update(User user) {
 		String u = findUser(user);
 		System.out.println(u);

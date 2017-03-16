@@ -1,6 +1,6 @@
-package com.object.swagger.api;
+package com.object.swagger.api.model;
 
-import com.wordnik.swagger.annotations.ApiModelProperty;
+import io.swagger.annotations.ApiModelProperty;
 
 import java.io.Serializable;
 

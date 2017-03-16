@@ -1,7 +1,8 @@
-package com.object.swagger.api;
+package com.object.swagger.api.model;
 
-import com.wordnik.swagger.annotations.ApiModel;
-import com.wordnik.swagger.annotations.ApiModelProperty;
+import com.object.swagger.api.model.CommonParam;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 /**
  * 

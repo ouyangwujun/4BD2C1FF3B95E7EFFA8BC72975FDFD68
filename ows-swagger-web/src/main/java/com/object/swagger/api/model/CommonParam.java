@@ -1,4 +1,4 @@
-package com.object.swagger.api;
+package com.object.swagger.api.model;
 
 public class CommonParam {
 
