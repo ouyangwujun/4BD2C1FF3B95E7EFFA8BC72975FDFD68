@@ -1,8 +1,8 @@
 package com.object.swagger.controller;
 
-import com.fasterxml.jackson.databind.util.JSONPObject;
-import com.fasterxml.jackson.databind.util.JSONWrappedObject;
 import com.google.common.base.Optional;
+import com.google.common.base.Strings;
+import io.swagger.annotations.Api;
 import io.swagger.models.Path;
 import io.swagger.models.Swagger;
 import org.slf4j.Logger;
@@ -26,7 +26,12 @@ import springfox.documentation.swagger2.mappers.ServiceModelToSwagger2Mapper;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
+import java.io.FilenameFilter;
+import java.io.IOException;
+import java.net.URL;
+import java.net.URLClassLoader;
 import java.util.HashMap;
+import java.util.jar.JarFile;
 
 /**
  * 读取接口中的文档信息
@@ -39,7 +44,7 @@ public class Swagger3Controller {
 
     private static final Logger logger = LoggerFactory.getLogger(Swagger3Controller.class.getName());
 
-    public static final String DEFAULT_URL = "/v3/api-docs";
+    public static final String DEFAULT_URL = "/api-docs";
 
     private static final String HAL_MEDIA_TYPE = "application/hal+json";
 
@@ -54,7 +59,7 @@ public class Swagger3Controller {
 
     @ApiIgnore
     @ResponseBody
-    @RequestMapping(value = "/api-docs",method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = DEFAULT_URL,method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Json> getDocumentation(
                 @RequestParam(value = "group",required = false) String swaggerGroup,
                 HttpServletRequest servletRequest) {
@@ -74,11 +79,49 @@ public class Swagger3Controller {
     private Swagger  getSwagger(Documentation documentation){
         Swagger swagger = this.mapper.mapDocumentation(documentation);
         logger.info("Paths:"+ swagger.getPaths());
-
         ClassLoader loader = getClass().getClassLoader();
-        File apiJarDirectory = new File(ClassLoader.getSystemClassLoader().getResource("/api").getFile());
-
-
+        File apiJarDirectory = new File(loader.getResource("/api").getFile());
+        if (apiJarDirectory.exists() && apiJarDirectory.isDirectory()) {
+            File[] files = apiJarDirectory.listFiles(new FilenameFilter() {
+                @Override
+                public boolean accept(File file, String s) {
+                    return s.endsWith(".jar");
+                }
+            });
+            if(files!=null){
+                for (File file : files) {
+                    URL url1 = null;
+                    URLClassLoader urlClassLoader = null;
+                    try {
+                        url1 = new URL("file:"+file.getPath());
+                        urlClassLoader = new URLClassLoader(new URL[] { url1 },
+                                            Thread.currentThread().getContextClassLoader());
+                        JarFile jfile = new JarFile(file);
+                        if ("dubbo".equals(jfile.getManifest().getMainAttributes().getValue("Api-Dependency-Type"))) {
+                            String ns = jfile.getManifest().getMainAttributes().getValue("Api-Export");
+                            String[] classNames = ns.split(" ");
+                            for (String name : classNames) {
+                                if (!Strings.isNullOrEmpty(name)) {
+                                    Class<?> clazz = urlClassLoader.loadClass(name.trim());
+                                    boolean isApiAnnotation = clazz.isAnnotationPresent(Api.class);
+                                    if(isApiAnnotation){
+                                        logger.info("isApiAnnotation:" +isApiAnnotation);
+                                    }
+                                }
+                            }
+                        }
+                    }catch (Throwable t){
+                        logger.error("Loader JarFile Error:" +t.getMessage(), t);
+                    }finally {
+                        try {
+                            if(urlClassLoader != null) urlClassLoader.close();
+                        } catch (IOException e) {
+                            logger.error("Close Error:" +e.getMessage(), e.fillInStackTrace());
+                        }
+                    }
+                }
+            }
+        }
         swagger.setPaths(new HashMap<String, Path>());
         return swagger;
     }
