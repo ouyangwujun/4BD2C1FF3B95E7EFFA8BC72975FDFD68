@@ -97,7 +97,8 @@ public class Swagger3Controller {
                         urlClassLoader = new URLClassLoader(new URL[] { url1 },
                                             Thread.currentThread().getContextClassLoader());
                         JarFile jfile = new JarFile(file);
-                        if ("dubbo".equals(jfile.getManifest().getMainAttributes().getValue("Api-Dependency-Type"))) {
+                        //取得MANIFEST.MF文件中的rest服务接口
+                        if ("rest".equals(jfile.getManifest().getMainAttributes().getValue("Api-Dependency-Type"))) {
                             String ns = jfile.getManifest().getMainAttributes().getValue("Api-Export");
                             String[] classNames = ns.split(" ");
                             for (String name : classNames) {
