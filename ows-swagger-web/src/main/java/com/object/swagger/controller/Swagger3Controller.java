@@ -2,9 +2,11 @@ package com.object.swagger.controller;
 
 import com.google.common.base.Optional;
 import com.google.common.base.Strings;
+import com.object.utils.JSONUtil;
 import io.swagger.annotations.Api;
 import io.swagger.models.Path;
 import io.swagger.models.Swagger;
+import net.sf.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,7 +70,8 @@ public class Swagger3Controller {
         if(documentation == null) {
             return new ResponseEntity(HttpStatus.NOT_FOUND);
         } else {
-            Swagger swagger = getSwagger(documentation);
+            Swagger swagger = this.mapper.mapDocumentation(documentation);
+            //Swagger swagger = getSwagger(documentation);
 /*            if(Strings.isNullOrEmpty(swagger.getHost())) {
                 swagger.host(this.hostName(servletRequest));
             }*/
@@ -78,7 +81,7 @@ public class Swagger3Controller {
 
     private Swagger  getSwagger(Documentation documentation){
         Swagger swagger = this.mapper.mapDocumentation(documentation);
-        logger.info("Paths:"+ swagger.getPaths());
+        logger.info("Paths:" + JSONObject.fromObject(swagger.getPaths()));
         ClassLoader loader = getClass().getClassLoader();
         File apiJarDirectory = new File(loader.getResource("/api").getFile());
         if (apiJarDirectory.exists() && apiJarDirectory.isDirectory()) {
