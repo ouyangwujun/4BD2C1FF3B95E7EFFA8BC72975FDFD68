@@ -6,7 +6,6 @@ import com.object.utils.JSONUtil;
 import io.swagger.annotations.Api;
 import io.swagger.models.Path;
 import io.swagger.models.Swagger;
-import net.sf.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -81,7 +80,7 @@ public class Swagger3Controller {
 
     private Swagger  getSwagger(Documentation documentation){
         Swagger swagger = this.mapper.mapDocumentation(documentation);
-        logger.info("Paths:" + JSONObject.fromObject(swagger.getPaths()));
+        logger.info("Paths:" + swagger.getPaths());
         ClassLoader loader = getClass().getClassLoader();
         File apiJarDirectory = new File(loader.getResource("/api").getFile());
         if (apiJarDirectory.exists() && apiJarDirectory.isDirectory()) {

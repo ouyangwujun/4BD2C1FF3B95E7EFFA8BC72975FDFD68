@@ -35,6 +35,7 @@
         <maven.plugin.source.version>2.2.1</maven.plugin.source.version>
         <maven.plugin.deploy.version>2.6</maven.plugin.deploy.version>
         <!-- ############dependency############# -->
+        <diamond_version>2.2-SNAPSHOT</diamond_version>
         <dubbo_version>2.8.4</dubbo_version>
         <zookeeper_version>3.4.6</zookeeper_version>
         <zkclient_version>0.4</zkclient_version>
@@ -287,6 +288,12 @@
                 <artifactId>zkclient</artifactId>
                 <version>${zkclient_version}</version>
             </dependency>
+            <!-- ####diamond#### -->
+            <dependency>
+                <groupId>com.taobao.diamond</groupId>
+                <artifactId>diamond-client</artifactId>
+                <version>${diamond_version}</version>
+            </dependency>
             <!-- ####dubbo#### -->
             <dependency>
                 <groupId>com.alibaba</groupId>
@@ -451,6 +458,16 @@
                 <groupId>com.fasterxml.jackson.core</groupId>
                 <artifactId>jackson-databind</artifactId>
                 <version>${jackson_version}</version>
+            </dependency>
+            <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-mapper-asl</artifactId>
+            <version>1.9.13</version>
+        </dependency>
+            <dependency>
+                <groupId>org.codehaus.jackson</groupId>
+                <artifactId>jackson-core-asl</artifactId>
+                <version>1.9.13</version>
             </dependency>
             <!-- servlet -->
             <dependency>
