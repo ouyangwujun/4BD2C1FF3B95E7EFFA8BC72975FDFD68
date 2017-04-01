@@ -21,6 +21,17 @@
         <path_maven_manifest>src/main/resources/META-INF/MANIFEST.MF</path_maven_manifest>
     </properties>
     <dependencies>
+        <!-- ####jboss#### -->
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-jaxrs</artifactId>
+        </dependency>
+        <!-- ####dubbo#### -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>dubbo</artifactId>
+            <version>${dubbo_version}</version>
+        </dependency>
         <!-- ####swagger#### -->
         <dependency>
             <groupId>io.springfox</groupId>

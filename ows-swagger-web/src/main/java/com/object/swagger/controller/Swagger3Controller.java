@@ -6,6 +6,8 @@ import com.object.utils.JSONUtil;
 import io.swagger.annotations.Api;
 import io.swagger.models.Path;
 import io.swagger.models.Swagger;
+import org.apache.catalina.WebResourceSet;
+import org.apache.catalina.loader.WebappClassLoader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,10 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 import springfox.documentation.service.Documentation;
 import springfox.documentation.spring.web.DocumentationCache;
@@ -29,8 +28,11 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.JarURLConnection;
 import java.net.URL;
 import java.net.URLClassLoader;
+import java.net.URLConnection;
 import java.util.HashMap;
 import java.util.jar.JarFile;
 
@@ -69,13 +71,46 @@ public class Swagger3Controller {
         if(documentation == null) {
             return new ResponseEntity(HttpStatus.NOT_FOUND);
         } else {
-            Swagger swagger = this.mapper.mapDocumentation(documentation);
-            //Swagger swagger = getSwagger(documentation);
-/*            if(Strings.isNullOrEmpty(swagger.getHost())) {
-                swagger.host(this.hostName(servletRequest));
-            }*/
+/*            Swagger swagger = getSwagger(documentation);*/
+            Swagger swagger = getSwaggerApi(documentation);
             return new ResponseEntity(this.jsonSerializer.toJson(swagger), HttpStatus.OK);
         }
+    }
+
+    private Swagger  getSwaggerApi(Documentation documentation){
+        Swagger swagger = this.mapper.mapDocumentation(documentation);
+        WebappClassLoader loader = (WebappClassLoader)getClass().getClassLoader();
+        URL[] urls = loader.getURLs();
+        String msg = "";
+        try {
+            for (URL url : urls) {
+                msg = url.getPath() + "  rest:false";
+                if(!url.getPath().endsWith(".jar")){
+                    continue;
+                }
+                JarFile jfile = new JarFile(url.getPath());
+                if ("rest".equals(jfile.getManifest().getMainAttributes().getValue("Api-Dependency-Type"))) {
+                    String ns = jfile.getManifest().getMainAttributes().getValue("Api-Export");
+                    String[] classNames = ns.split(" ");
+                    for (String name : classNames) {
+                        if (!Strings.isNullOrEmpty(name)) {
+                            Class<?> clazz = loader.loadClass(name.trim());
+                            boolean isRestController = clazz.isAnnotationPresent(RestController.class);
+                            if(isRestController){
+                                logger.info("isApiAnnotation:" +isRestController);
+                            }
+                        }
+                    }
+                    msg = url.getPath() + "  rest:true";
+                }
+                logger.info("loader api msg:{}", msg);
+            }
+        } catch (IOException e) {
+            logger.error("loader api IOException:", e);
+        } catch (ClassNotFoundException e) {
+            logger.error("loader api ClassNotFoundException:", e);
+        }
+        return swagger;
     }
 
     private Swagger  getSwagger(Documentation documentation){

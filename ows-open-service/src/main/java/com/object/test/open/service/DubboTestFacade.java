@@ -17,25 +17,18 @@ import javax.ws.rs.core.MediaType;
  * Consumes:方法可以接受的 MIME 类型
  * Produces:方法可以返回的 MIME 类型
  */
-@Path("dubboTestFacade")
-@Consumes({ContentType.APPLICATION_JSON_UTF_8, ContentType.TEXT_XML_UTF_8})
-@Produces({ContentType.APPLICATION_JSON_UTF_8, ContentType.TEXT_XML_UTF_8})
 public class DubboTestFacade implements IDubboTest{
 
     private static final Logger logger  = LoggerFactory.getLogger(DubboTestFacade.class);
 
-    @POST
-    @Path("searchTest")
-    public TestResponse testMathedPost(@BeanParam TestRequest testRequest) {
+    public TestResponse testMathedPost(TestRequest testRequest) {
         TestResponse testResponse = new TestResponse();
         BeanUtils.copyProperties(testRequest, testResponse);
         logger.info("open testMathedPost Return :{}",testRequest.toString());
         return testResponse;
     }
 
-    @GET
-    @Path("pullTest")
-    public TestResponse testMathedGet(@QueryParam("n") String name) {
+    public TestResponse testMathedGet(String name) {
         TestResponse testResponse = new TestResponse();
         testResponse.setCode(1000000L);
         testResponse.setName(name);
