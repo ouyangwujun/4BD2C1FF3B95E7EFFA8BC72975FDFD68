@@ -1,9 +1,6 @@
 package com.object.swagger.controller;
 
 import com.google.common.base.Optional;
-import com.google.common.base.Strings;
-import io.swagger.annotations.Api;
-import io.swagger.models.Path;
 import io.swagger.models.Swagger;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,13 +22,6 @@ import springfox.documentation.spring.web.json.JsonSerializer;
 import springfox.documentation.swagger2.mappers.ServiceModelToSwagger2Mapper;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.File;
-import java.io.FilenameFilter;
-import java.io.IOException;
-import java.net.URL;
-import java.net.URLClassLoader;
-import java.util.HashMap;
-import java.util.jar.JarFile;
 
 /**
  * 读取接口中的文档信息
@@ -68,13 +58,8 @@ public class Swagger2Controller {
         if(documentation == null) {
             return new ResponseEntity(HttpStatus.NOT_FOUND);
         } else {
-            Swagger swagger = getSwagger(documentation);
+            Swagger swagger = this.mapper.mapDocumentation(documentation);
             return new ResponseEntity(this.jsonSerializer.toJson(swagger), HttpStatus.OK);
         }
-    }
-
-    private Swagger  getSwagger(Documentation documentation){
-        Swagger swagger = this.mapper.mapDocumentation(documentation);
-        return swagger;
     }
 }

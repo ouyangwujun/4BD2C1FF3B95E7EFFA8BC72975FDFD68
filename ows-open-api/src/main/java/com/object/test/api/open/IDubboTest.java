@@ -27,6 +27,10 @@ public interface IDubboTest {
 
     @GET
     @Path("testMathedGet")
-    @ApiOperation(value = "testMathedPost测试方法", notes = "Post测试方法", response = TestResponse.class)
+    @ApiOperation(
+            value = "testMathedPost测试方法",
+            notes = "Post测试方法",
+            response = TestResponse.class
+    )
     TestResponse testMathedGet(@QueryParam("n") String testRequest);
 }

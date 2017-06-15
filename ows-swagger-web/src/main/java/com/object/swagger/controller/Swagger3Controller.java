@@ -71,7 +71,6 @@ public class Swagger3Controller {
         if(documentation == null) {
             return new ResponseEntity(HttpStatus.NOT_FOUND);
         } else {
-/*            Swagger swagger = getSwagger(documentation);*/
             Swagger swagger = getSwaggerApi(documentation);
             return new ResponseEntity(this.jsonSerializer.toJson(swagger), HttpStatus.OK);
         }
