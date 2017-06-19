@@ -1,14 +1,14 @@
 package com.object.swagger.config;
 
 import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
-import com.google.common.collect.Iterables;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
@@ -31,36 +31,50 @@ public class RestApiConfig extends WebMvcConfigurationSupport{
 
     private static final Logger logger = LoggerFactory.getLogger(RestApiConfig.class.getName());
 
+//    @Bean
+//    public Docket createRestApiV1() {
+//        /**
+//         * selector
+//         */
+//        Predicate<RequestHandler> selector = new Predicate<RequestHandler>() {
+//            @Override
+//            public boolean apply(RequestHandler input) {
+//                Class<?> declaringClass = input.declaringClass();
+//                if (declaringClass == Controller.class) //排除
+//                    return false;
+//                if(declaringClass.isAnnotationPresent(RestController.class)) // 被注解的类
+//                    return true;
+//                if(input.isAnnotatedWith(ResponseBody.class)) // 被注解的方法
+//                    return true;
+//                return false;
+//            }
+//        };
+//
+//        return new Docket(DocumentationType.SWAGGER_2)
+//                .groupName("V1")
+//                .apiInfo(apiInfo())
+//                .useDefaultResponseMessages(false)
+//                .select()
+//                .paths(PathSelectors.any())
+//                .apis(selector)
+//                .build();
+//    }
+
     @Bean
-    public Docket createRestApi() {
+    public Docket createRestApiV2() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
                 .useDefaultResponseMessages(false)
                 .select()
                 .paths(PathSelectors.any())
-                .apis(Predicates.and(RequestHandlerSelectors.withClassAnnotation(RestController.class)))
+                //下面这句代码是只生成被ApiOperation这个注解注解过的api接口
+                .apis(RequestHandlerSelectors.withMethodAnnotation(ApiOperation.class))
                 .build();
     }
+
     /**
-     *apis V2
-     * @return
-     */
-    private Predicate<RequestHandler> transformApis() {
-        return new Predicate<RequestHandler>() {
-            public boolean apply(RequestHandler input) {
-                Class<?>  zclass = input.getHandlerMethod().getMethod().getDeclaringClass();
-                //RestController
-                RestController apis = zclass.getAnnotation(RestController.class);
-                if(apis!=null){
-                    return true;
-                }
-                return false;
-            }
-        };
-    }
-    /**
-     *
-     * @return
+     * createRestApi apiInfo
+     * @return ApiInfo
      */
     private ApiInfo apiInfo() {
         Contact contact = new Contact("Ouyang", "www.baidu.com", "619435294@qq.com");

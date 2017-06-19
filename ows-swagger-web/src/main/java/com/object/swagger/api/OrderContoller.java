@@ -29,6 +29,7 @@ public class OrderContoller {
 			result.setData(order);
 			return result;
 		}
+
 		@RequestMapping(value="addOrder", method=RequestMethod.POST)
 		@ApiOperation(value="添加订单", notes="添加订单信息", httpMethod="POST")
 		@ApiImplicitParams({
