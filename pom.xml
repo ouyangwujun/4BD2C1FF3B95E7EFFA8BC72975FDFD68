@@ -48,8 +48,7 @@
         <mybatis.spring_version>1.2.2</mybatis.spring_version>
         <mysql.connector.java_version>1.2.2</mysql.connector.java_version>
         <jackson_version>2.6.6</jackson_version>
-        <swagger_version>2.6.1</swagger_version>
-        <swagger_springmvc_version>1.0.2</swagger_springmvc_version>
+        <swagger_version>1.5.14</swagger_version>
     </properties>
 
     <profiles>
@@ -334,6 +333,12 @@
                     </exclusion>
                 </exclusions>
             </dependency>
+            <!-- 集成dubbo restfull -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>dubbo-integration-swagger</artifactId>
+                <version>${dubbo_version}</version>
+            </dependency>
             <dependency>
                 <groupId>org.jboss.resteasy</groupId>
                 <artifactId>resteasy-jaxrs</artifactId>
@@ -358,7 +363,7 @@
             <dependency>
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
-                <version>18.0</version>
+                <version>21.0</version>
             </dependency>
             <dependency>
                 <groupId>com.google.code.gson</groupId>
@@ -444,44 +449,44 @@
             </dependency>
             <!-- ##########################swagger###################### -->
             <dependency>
-                <groupId>io.springfox</groupId>
-                <artifactId>springfox-swagger2</artifactId>
+                <groupId>io.swagger</groupId>
+                <artifactId>swagger-annotations</artifactId>
                 <version>${swagger_version}</version>
             </dependency>
-<!--            <dependency>
-                <groupId>com.mangofactory</groupId>
-                <artifactId>swagger-springmvc</artifactId>
-                <version>${swagger_springmvc_version}</version>
-            </dependency>-->
-            <!-- jackson -->
+            <dependency>
+                <groupId>io.swagger</groupId>
+                <artifactId>swagger-jaxrs</artifactId>
+                <version>${swagger_version}</version>
+            </dependency>
+            <!-- ##########################jackson########################## -->
             <dependency>
                 <groupId>com.fasterxml.jackson.core</groupId>
                 <artifactId>jackson-databind</artifactId>
                 <version>${jackson_version}</version>
             </dependency>
             <dependency>
-            <groupId>org.codehaus.jackson</groupId>
-            <artifactId>jackson-mapper-asl</artifactId>
-            <version>1.9.13</version>
-        </dependency>
+                <groupId>org.codehaus.jackson</groupId>
+                <artifactId>jackson-mapper-asl</artifactId>
+                <version>1.9.13</version>
+            </dependency>
             <dependency>
                 <groupId>org.codehaus.jackson</groupId>
                 <artifactId>jackson-core-asl</artifactId>
                 <version>1.9.13</version>
             </dependency>
-            <!-- servlet -->
+            <!-- ##########################servlet########################## -->
             <dependency>
                 <groupId>javax.servlet</groupId>
                 <artifactId>javax.servlet-api</artifactId>
                 <version>3.1.0</version>
             </dependency>
-            <!-- mapstruct -->
+            <!-- ##########################mapstruct########################## -->
             <dependency>
                 <groupId>org.mapstruct</groupId>
                 <artifactId>mapstruct</artifactId>
                 <version>1.0.0.Final</version>
             </dependency>
-            <!-- common -->
+            <!-- ##########################common########################## -->
             <dependency>
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-lang3</artifactId>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                          http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+                          http://www.springframework.org/schema/context
+                          http://www.springframework.org/schema/context/spring-context-4.0.xsd
+                          http://code.alibabatech.com/schema/dubbo
+                          http://code.alibabatech.com/schema/dubbo/dubbo.xsd"
+       default-lazy-init="true">
+    <!-- annotation open -->
+    <context:annotation-config/>
+    <!-- load config -->
+    <context:property-placeholder
+            file-encoding="UTF-8"
+            ignore-resource-not-found="true"
+            system-properties-mode="OVERRIDE"
+            location="file:/data/ows-service/config.properties"/>
+
+    <dubbo:application name="demo-provider" owner="programmer" organization="dubbox"/>
+
+    <dubbo:registry address="zookeeper://192.168.6.18:2181"/>
+
+    <!-- here we demonstrate both annotation-based and xml-based configs -->
+    <dubbo:annotation package="com.object.test" />
+
+    <import resource="./dubbo/application-open-test.xml" />
+</beans>
