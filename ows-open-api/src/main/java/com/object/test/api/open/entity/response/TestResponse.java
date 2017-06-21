@@ -1,6 +1,8 @@
 package com.object.test.api.open.entity.response;
 
 import com.sun.org.glassfish.gmbal.Description;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -11,18 +13,15 @@ import java.io.Serializable;
 /**
  * Created by PUZE81 on 2017/3/1.
  */
-@Description("包装的响应对象")
-@XmlRootElement(name = "TestResponse")
-@XmlAccessorType(XmlAccessType.FIELD)
+@ApiModel(value = "包装的响应对象" ,description = "包装的响应对象描述")
 public class TestResponse implements Serializable{
 
     private static final long serialVersionUID = -1263417941788097412L;
-    @Description("Code属性")
-    @XmlElement(name="Code")
+
+    @ApiModelProperty(value = "人员代码", required = true)
     private Long code;
 
-    @Description("Name属性")
-    @XmlElement(name="Name")
+    @ApiModelProperty(value = "人员姓名", required = true)
     private String name;
 
     public String getName() {

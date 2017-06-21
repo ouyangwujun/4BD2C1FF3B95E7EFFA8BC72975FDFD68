@@ -8,13 +8,13 @@
                           http://code.alibabatech.com/schema/dubbo/dubbo.xsd"
        default-lazy-init="true">
 
-    <bean id="testSwaggerService" class="com.alibaba.dubbo.integration.swagger.DubboSwaggerApiListingResource"/>
+    <bean id="swaggerService" class="com.alibaba.dubbo.integration.swagger.DubboSwaggerApiListingResource"/>
 
-    <bean id="testBeanConfig" class="io.swagger.jaxrs.config.BeanConfig">
+    <bean id="beanConfig" class="io.swagger.jaxrs.config.BeanConfig">
         <property name="schemes" value="http" />
         <property name="resourcePackage" value="com.object.test"/>
         <property name="version" value="2.0"/>
-        <property name="host" value="localhost:9080"/>
+        <property name="host" value="localhost:8888"/>
         <property name="basePath" value="/services/"/>
         <property name="title" value="title"/>
         <property name="description" value="desc"/>
@@ -24,5 +24,5 @@
         <property name="scan" value="true" />
     </bean>
 
-    <dubbo:service interface="com.alibaba.dubbo.integration.swagger.DubboSwaggerService" ref="testSwaggerService"/>
+    <dubbo:service interface="com.alibaba.dubbo.integration.swagger.DubboSwaggerService" ref="swaggerService"/>
 </beans>

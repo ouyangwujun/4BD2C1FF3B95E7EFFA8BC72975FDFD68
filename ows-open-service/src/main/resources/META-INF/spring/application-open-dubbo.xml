@@ -34,15 +34,17 @@
             accepts:同时接收的最大HTTP连接数
     -->
     <dubbo:protocol name="rest"
-                      server="jetty"
+                      server="tomcat"
                       port="8888"
                       contextpath="services"
                       threads="500"
                       accepts="500"
                       extension="com.alibaba.dubbo.rpc.protocol.rest.support.LoggingFilter"
     />
-    <!-- provider:提供者 -->
+    <!-- restfull接入swagger -->
+<!--    <import resource="./dubbo/application-open-swagger.xml" />-->
+    <!-- dubbo provider:提供者 -->
     <import resource="./dubbo/application-open-provider.xml" />
-    <!-- consumer:消费者 -->
+    <!-- dubbo consumer:消费者 -->
     <import resource="./dubbo/application-open-consumer.xml" />
 </beans>
