@@ -10,7 +10,7 @@
 
   <context-param>
     <param-name>contextConfigLocation</param-name>
-    <param-value>classpath:spring/dubbo-demo-provider.xml</param-value>
+    <param-value>classpath:spring/dubbo-swagger.xml</param-value>
   </context-param>
 
   <!--this listener must be defined before the spring listener-->
