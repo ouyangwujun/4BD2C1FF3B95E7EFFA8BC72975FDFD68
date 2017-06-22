@@ -27,9 +27,7 @@ public abstract class DynamicConfig {
     public abstract String getUserdynamicDataId();
 
     public DynamicConfig(){
-        DefaultDiamondManager defaultDiamondManager = new DefaultDiamondManager(getUserGroupId(), getUserdynamicDataId(), ruleConfigListener);
-        //第一次获取数据
-        defaultDiamondManager.getManagerListeners().get(0).receiveConfigInfo(defaultDiamondManager.getAvailableConfigureInfomation(5000));
+        init();
     }
 
     private ManagerListener ruleConfigListener = new ManagerListener() {
@@ -53,6 +51,12 @@ public abstract class DynamicConfig {
             return null;
         }
     };
+
+    public void init(){
+        DefaultDiamondManager defaultDiamondManager = new DefaultDiamondManager(getUserGroupId(), getUserdynamicDataId(), ruleConfigListener);
+        //第一次获取数据
+        defaultDiamondManager.getManagerListeners().get(0).receiveConfigInfo(defaultDiamondManager.getAvailableConfigureInfomation(5000));
+    }
 
     private void refreshInfo(Properties properties){
         if(null != configs){

@@ -23,9 +23,13 @@ public class DemoDiamondConfig extends DynamicConfig {
     private static final String                USER_GROUP_ID          = "COUPON";
     private static final String                USERDYNAMIC_DATA_ID    = "com.sfebiz.coupon.dynamic.config";
 
+    private DemoDiamondConfig(){
+        super();
+    }
+
     private static final DemoDiamondConfig instance = new DemoDiamondConfig();
 
-    public DemoDiamondConfig getInstance() {
+    public static DemoDiamondConfig getInstance() {
         return instance;
     }
 
