@@ -15,14 +15,25 @@
  - limitations under the License.
 -->
 <beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
-	http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+                        http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+                        http://www.springframework.org/schema/context
+                        http://www.springframework.org/schema/context/spring-context-4.0.xsd
+                        http://code.alibabatech.com/schema/dubbo
+                        http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+    <!-- load config -->
+    <context:property-placeholder
+                file-encoding="UTF-8"
+                ignore-resource-not-found="true"
+                system-properties-mode="OVERRIDE"
+                location="file:/data/ows-service/config.properties"/>
 
     <dubbo:application name="demo-swagger" owner="programmer" organization="dubbox"/>
 
-    <dubbo:registry address="zookeeper://192.168.6.18:2181"/>
+    <dubbo:registry address="${dubbo.registry.url}"/>
 
     <!-- use tomcat server -->
     <dubbo:protocol name="rest" port="8888" threads="500" contextpath="services" server="tomcat" accepts="500"
