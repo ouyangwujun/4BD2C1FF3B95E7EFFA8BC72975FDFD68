@@ -36,7 +36,7 @@
     <dubbo:registry address="${dubbo.registry.url}"/>
 
     <!-- use tomcat server -->
-    <dubbo:protocol name="rest" port="8888" threads="500" contextpath="services" server="tomcat" accepts="500"
+    <dubbo:protocol name="rest" port="${dubbox.rest.port}" threads="500" contextpath="${dubbox.rest.contextpath}" server="tomcat" accepts="500"
                     extension="com.alibaba.dubbo.rpc.protocol.rest.support.LoggingFilter"/>
 
     <bean id="swaggerService" class="com.alibaba.dubbo.integration.swagger.DubboSwaggerApiListingResource"/>
@@ -44,13 +44,13 @@
     <bean id="beanConfig" class="io.swagger.jaxrs.config.BeanConfig">
         <property name="schemes" value="http" />
         <!-- com.abc.aa这个值不能写成com.abc.aa.*-->
-        <property name="resourcePackage" value="com.object.test"/>
+        <property name="resourcePackage" value="${dubbox.swagger.resourcePackage}"/>
         <property name="version" value="2.0"/>
-        <property name="host" value="localhost:8888"/>
-        <property name="basePath" value="/services/"/>
-        <property name="title" value="这个是标题啊"/>
-        <property name="description" value="这里是描述呢"/>
-        <property name="contact" value="abc"/>
+        <property name="host" value="${dubbox.swagger.rest.host}:${dubbox.swagger.rest.port}"/>
+        <property name="basePath" value="${dubbox.swagger.rest.basePath}"/>
+        <property name="title" value="${dubbox.swagger.title}"/>
+        <property name="description" value="${dubbox.swagger.description}"/>
+        <property name="contact" value="${dubbox.swagger.contact}"/>
         <property name="license" value="Apache 2.0"/>
         <property name="licenseUrl" value="http://www.apache.org/licenses/LICENSE-2.0.html"/>
         <property name="scan" value="true" />

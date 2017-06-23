@@ -13,14 +13,14 @@ import javax.ws.rs.*;
 @Path("IDubboTest")
 @Consumes({ContentType.APPLICATION_JSON_UTF_8, ContentType.TEXT_XML_UTF_8})
 @Produces({ContentType.APPLICATION_JSON_UTF_8, ContentType.TEXT_XML_UTF_8})
-@Api(value = "test", description = "测试管理")
+@Api(value = "测试管理")
 public interface IDubboTest {
 
     @POST
     @Path("testMathedPost")
     @ApiOperation(
             value = "testMathedPost测试方法" ,
-            notes = "Get测试方法",
+            notes = "POST测试方法",
             response = TestResponse.class
     )
     TestResponse testMathedPost(@BeanParam TestRequest testRequest);
@@ -29,7 +29,7 @@ public interface IDubboTest {
     @Path("testMathedGet")
     @ApiOperation(
             value = "testMathedPost测试方法",
-            notes = "Post测试方法",
+            notes = "GET测试方法",
             response = TestResponse.class
     )
     TestResponse testMathedGet(@QueryParam("n") String testRequest);
