@@ -340,6 +340,12 @@
                 <artifactId>dubbo-integration-swagger</artifactId>
                 <version>${dubbo_version}</version>
             </dependency>
+            <!-- 集成dubbo restfull security-->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>dubbo-integration-restfull</artifactId>
+                <version>${dubbo_version}</version>
+            </dependency>
             <!-- ####################resteasy#################### -->
             <dependency>
                 <groupId>org.jboss.resteasy</groupId>
