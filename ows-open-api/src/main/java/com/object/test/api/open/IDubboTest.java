@@ -10,7 +10,7 @@ import javax.ws.rs.*;
 /**
  * Created by PUZE81 on 2017/2/27.
  */
-@Path("IDubboTest")
+@Path("test")
 @Consumes({ContentType.APPLICATION_JSON_UTF_8, ContentType.TEXT_XML_UTF_8})
 @Produces({ContentType.APPLICATION_JSON_UTF_8, ContentType.TEXT_XML_UTF_8})
 @Api(value = "测试管理")

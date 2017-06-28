@@ -35,9 +35,7 @@
     -->
     <dubbo:protocol name="rest" port="8888" contextpath="services"
                       server="tomcat" threads="500" accepts="500"
-                      extension="com.alibaba.dubbo.rpc.protocol.rest.support.LoggingFilter,
-                    com.alibaba.dubbo.integration.security.extension.SecurityTraceFilter,
-                    com.alibaba.dubbo.integration.security.extension.SecurityExceptionMapper"
+                      extension="com.alibaba.dubbo.rpc.protocol.rest.support.LoggingFilter"
     />
     <!-- dubbo provider:提供者 -->
     <import resource="./dubbo/application-open-provider.xml" />
