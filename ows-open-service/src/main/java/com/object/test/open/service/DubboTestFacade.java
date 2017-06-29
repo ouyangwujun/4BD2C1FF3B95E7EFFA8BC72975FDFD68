@@ -1,6 +1,6 @@
 package com.object.test.open.service;
 
-import com.alibaba.dubbo.rpc.protocol.rest.support.ContentType;
+import com.alibaba.dubbo.integration.security.model.SecurityType;
 import com.object.test.api.open.IDubboTest;
 import com.object.test.api.open.entity.request.TestRequest;
 import com.object.test.api.open.entity.response.TestResponse;
@@ -28,11 +28,20 @@ public class DubboTestFacade implements IDubboTest{
         return testResponse;
     }
 
-    public TestResponse testMathedGet(String name) {
+    public TestResponse testMathedGetCookie(@CookieParam(SecurityType.APP_KEY) String appKey,@CookieParam(SecurityType.TOKEN) String token, String name) {
         TestResponse testResponse = new TestResponse();
         testResponse.setCode(1000000L);
         testResponse.setName(name);
         logger.info("open testMathedGet Return :{}",testResponse.toString());
+        return testResponse;
+    }
+
+    @Override
+    public TestResponse testMathedGetHeader(@HeaderParam(SecurityType.APP_KEY) String appKey, @HeaderParam(SecurityType.TOKEN) String token, String name) {
+        TestResponse testResponse = new TestResponse();
+        testResponse.setCode(1000000L);
+        testResponse.setName(name);
+        logger.info("open testMathedGetV2 Return :{}",testResponse.toString());
         return testResponse;
     }
 }
