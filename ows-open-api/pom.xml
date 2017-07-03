@@ -21,6 +21,12 @@
         <path_maven_manifest>src/main/resources/META-INF/MANIFEST.MF</path_maven_manifest>
     </properties>
     <dependencies>
+        <!-- #########################应用包########################## -->
+        <dependency>
+            <groupId>com.object</groupId>
+            <artifactId>ows-commons</artifactId>
+        </dependency>
+        <!-- #########################其他########################## -->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>dubbo</artifactId>
@@ -52,6 +58,11 @@
         <dependency>
             <groupId>io.swagger</groupId>
             <artifactId>swagger-annotations</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.object</groupId>
+            <artifactId>ows-commons</artifactId>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
 </project>

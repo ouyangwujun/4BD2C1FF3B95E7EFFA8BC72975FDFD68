@@ -2,6 +2,7 @@ package com.object.test.api.open;
 
 import com.alibaba.dubbo.integration.security.model.SecurityType;
 import com.alibaba.dubbo.rpc.protocol.rest.support.ContentType;
+import com.object.test.api.open.entity.BaseResponseEntity;
 import com.object.test.api.open.entity.request.TestRequest;
 import com.object.test.api.open.entity.response.TestResponse;
 import io.swagger.annotations.*;
@@ -22,9 +23,9 @@ public interface IDubboTest {
     @ApiOperation(
             value = "testMathedPost测试方法" ,
             notes = "POST测试方法",
-            response = TestResponse.class
+            response = TestRequest.class
     )
-    TestResponse testMathedPost(@BeanParam TestRequest testRequest);
+    BaseResponseEntity<TestResponse> testMathedPost(@BeanParam TestRequest testRequest);
 
     @GET
     @Path("testMathedGetCookie")
@@ -33,7 +34,7 @@ public interface IDubboTest {
             notes = "GET测试方法",
             response = TestResponse.class
     )
-    TestResponse testMathedGetCookie(
+    BaseResponseEntity<TestResponse> testMathedGetCookie(
             @CookieParam(SecurityType.APP_KEY) String appKey,
             @CookieParam(SecurityType.TOKEN) String token,
             @QueryParam("n") String name);
@@ -45,7 +46,10 @@ public interface IDubboTest {
             notes = "GET测试方法",
             response = TestResponse.class
     )
-    TestResponse testMathedGetHeader(
+    @ApiResponses({
+            @ApiResponse(code = 3000001, message = "测试接口调用异常")
+    })
+    BaseResponseEntity<TestResponse> testMathedGetHeader(
             @HeaderParam(SecurityType.APP_KEY) String appKey,
             @HeaderParam(SecurityType.TOKEN) String token,
             @QueryParam("n") String name);
