@@ -2,7 +2,9 @@ package com.object.test.api.open;
 
 import com.alibaba.dubbo.integration.security.model.SecurityType;
 import com.alibaba.dubbo.rpc.protocol.rest.support.ContentType;
+import com.object.entity.BaseErrorCode;
 import com.object.test.api.open.entity.BaseResponseEntity;
+import com.object.test.api.open.entity.ValidateErrorCode;
 import com.object.test.api.open.entity.request.TestRequest;
 import com.object.test.api.open.entity.response.TestResponse;
 import io.swagger.annotations.*;
@@ -25,6 +27,9 @@ public interface IDubboTest {
             notes = "POST测试方法",
             response = TestRequest.class
     )
+    @ApiResponses({
+            @ApiResponse(code = BaseErrorCode.Code.SUCCEED, message = BaseErrorCode.Desc.SUCCEED)
+    })
     BaseResponseEntity<TestResponse> testMathedPost(@BeanParam TestRequest testRequest);
 
     @GET
@@ -34,6 +39,9 @@ public interface IDubboTest {
             notes = "GET测试方法",
             response = TestResponse.class
     )
+    @ApiResponses({
+            @ApiResponse(code = BaseErrorCode.Code.SUCCEED, message = BaseErrorCode.Desc.SUCCEED)
+    })
     BaseResponseEntity<TestResponse> testMathedGetCookie(
             @CookieParam(SecurityType.APP_KEY) String appKey,
             @CookieParam(SecurityType.TOKEN) String token,
@@ -47,7 +55,8 @@ public interface IDubboTest {
             response = TestResponse.class
     )
     @ApiResponses({
-            @ApiResponse(code = 3000001, message = "测试接口调用异常")
+            @ApiResponse(code = BaseErrorCode.Code.SUCCEED, message = BaseErrorCode.Desc.SUCCEED),
+            @ApiResponse(code = ValidateErrorCode.Code.TEST_ERR, message = ValidateErrorCode.Desc.TEST_ERR)
     })
     BaseResponseEntity<TestResponse> testMathedGetHeader(
             @HeaderParam(SecurityType.APP_KEY) String appKey,

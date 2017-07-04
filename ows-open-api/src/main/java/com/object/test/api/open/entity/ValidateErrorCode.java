@@ -8,10 +8,13 @@ import com.object.entity.BaseErrorCode;
  */
 public class ValidateErrorCode extends BaseErrorCode{
 
-    protected ValidateErrorCode(String desc, int code) {
-        super(desc, code);
+    public static class Code{
+        public final static int TEST_ERR = 3000001;
+
     }
 
-    private final static int _C_TEST_ERR = 3000001;
-    public final static BaseErrorCode TEST_ERR = new BaseErrorCode("测试接口调用异常", _C_TEST_ERR);
+    public static class Desc{
+        public final static String TEST_ERR = "测试接口调用异常";
+
+    }
 }

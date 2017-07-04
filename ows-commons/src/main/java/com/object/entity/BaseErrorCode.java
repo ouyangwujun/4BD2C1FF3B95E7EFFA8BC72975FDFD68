@@ -7,32 +7,29 @@ import java.io.Serializable;
  */
 public class BaseErrorCode implements Serializable {
 
-    private static final long serialVersionUID = 2403306874401029303L;
+    public static final long serialVersionUID = 2403306874401029303L;
 
-    private final static int _C_CUSTOM_BUSINESS_ERR = 1000000;
-    public final static BaseErrorCode CUSTOM_BUSINESS_ERR = new BaseErrorCode("业务异常", _C_CUSTOM_BUSINESS_ERR);
+    public static class Code{
 
-    private final static int _C_CUSTOM_APP_ERR = 2000000;
-    public final static BaseErrorCode CUSTOM_APP_ERR = new BaseErrorCode("应用异常", _C_CUSTOM_APP_ERR);
+        public final static int  SUCCEED = 0;
 
-    private final static int _C_CUSTOM_VALIDATE_ERR = 3000000;
-    public final static BaseErrorCode CUSTOM_VALIDATE_ERR = new BaseErrorCode("校验异常", _C_CUSTOM_VALIDATE_ERR);
+        public final static int CUSTOM_BUSINESS_ERR = 1000000;
 
+        public final static int CUSTOM_APP_ERR = 2000000;
 
-    private static int code = -1;
+        public final static int CUSTOM_VALIDATE_ERR = 3000000;
 
-    private static String desc = "";
-
-    public BaseErrorCode(String desc, int code) {
-        BaseErrorCode.code = code;
-        BaseErrorCode.desc = desc;
     }
 
-    public static String getDesc() {
-        return desc;
-    }
+    public static class Desc{
 
-    public static int getCode() {
-        return code;
+        public final static String  SUCCEED = "成功";
+
+        public final static String CUSTOM_BUSINESS_ERR = "业务异常";
+
+        public final static String CUSTOM_APP_ERR = "应用异常";
+
+        public final static String CUSTOM_VALIDATE_ERR = "校验异常";
+
     }
 }
