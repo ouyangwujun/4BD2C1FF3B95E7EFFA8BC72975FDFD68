@@ -9,7 +9,6 @@ import com.object.entity.BaseErrorCode;
 public class ValidateErrorCode extends BaseErrorCode{
 
     public static class Code{
-
         public final static int TEST_ERR = 3000001;
 
     }
